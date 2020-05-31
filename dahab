@@ -1,0 +1,45 @@
+from selenium import webdriver
+from time import sleep
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.wait import WebDriverWait
+######################
+##############################
+print('''
+        ======================================
+        ==              Dahab               ==
+        ==      Coded By Ahmed Mubarak      ==
+        ==           +201145672039          ==
+        ======================================
+''' )
+email = ''
+password = ''
+file = open('acc.txt' , 'r')
+for row in file:
+     field = row.split(":")
+     email = field[0]
+     password = field[1]
+     options = webdriver.ChromeOptions()
+     prefs = {"profile.default_content_setting_values.notifications" : 2}
+     options.add_argument("--incognito")
+     #options.headless = True
+     options.add_experimental_option("prefs", prefs)
+     driver = webdriver.Chrome(chrome_options=options)
+     driver.implicitly_wait(30)
+     driver.get("https://www.facebook.com")
+     email_box = driver.find_element_by_id('email')
+     email_box.clear()
+     email_box.send_keys(email)
+     pass_box = driver.find_element_by_id('pass')
+     pass_box.clear()
+     pass_box.send_keys(password)
+     driver.find_element_by_xpath('//label/input').click
+     sleep(5)
+     ff = open('id.txt','r')
+     for idd in ff:
+         driver.implicitly_wait(30)
+         driver.get("https://m.facebook.com/" + idd)
+         driver.find_element_by_xpath('//a[contains(.,\'‏‏ ‏إضافة صديق‏\')]').click()
+print('Finshed')
+print('isco')
+print('dahab')
+
